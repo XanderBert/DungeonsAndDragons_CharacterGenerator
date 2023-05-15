@@ -22,23 +22,26 @@ namespace DungeonsAndDragonsApp.Model.DnD
         [JsonProperty("url")]
         public string Url { get; set; }
 
+        [JsonProperty("hit_die")]
+        public int HitDie { get; set; }
+
         [JsonIgnore]
         public Image ClassImage { get; private set; }
 
-        public void LoadImage() 
+        public void LoadImage()
         {
             ClassImage = new Image();
 
-            try 
+            try
             {
                 ClassImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/DungeonsAndDragonsApp;component/Resources/Classes/" + ClassName + ".png"));
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
 
                 ClassImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/DungeonsAndDragonsApp;component/Resources/Classes/NotFound.png"));
 
-            }           
+            }
         }
     }
 }

@@ -171,7 +171,21 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\Classes\NotFound.png" />
+    <Resource Include="Resources\Classes\NotFound.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Classes\Barbarian.png" />
+    <Resource Include="Resources\Classes\Bard.png" />
+    <Resource Include="Resources\Classes\Cleric.png" />
+    <Resource Include="Resources\Classes\Druid.png" />
+    <Resource Include="Resources\Classes\Fighter.png" />
+    <Resource Include="Resources\Classes\Monk.png" />
+    <Resource Include="Resources\Classes\Paladin.png" />
+    <Resource Include="Resources\Classes\Ranger.png" />
+    <Resource Include="Resources\Classes\Rogue.png" />
+    <Resource Include="Resources\Classes\Sorcerer.png" />
+    <Resource Include="Resources\Classes\Warlock.png" />
+    <Resource Include="Resources\Classes\Wizard.png" />
     <Content Include="Resources\Fonts\TrajanPro-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

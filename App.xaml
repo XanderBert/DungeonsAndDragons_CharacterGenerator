@@ -20,13 +20,13 @@
 
                 <Setter Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource BackgroundColor}" />
+                        <SolidColorBrush Color="WhiteSmoke" />
                     </Setter.Value>
                 </Setter>
 
                 <Setter Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource PrimaryColor}" />
+                        <SolidColorBrush Color="Black" />
                     </Setter.Value>
                 </Setter>
             </Style>

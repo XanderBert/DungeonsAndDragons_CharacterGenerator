@@ -9,7 +9,7 @@
     Title="CharacterGeneratorPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Background="#171D2B"
+    Background="AliceBlue"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -23,17 +23,17 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*" />
+            <RowDefinition Height="5*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <ListBox
             x:Name="classPicker"
-            Grid.Column="0"
             AutomationProperties.IsOffscreenBehavior="Onscreen"
             BorderBrush="Transparent"
             BorderThickness="0"
@@ -42,6 +42,12 @@
             SelectedItem="{Binding SelectedClass}"
             Style="{StaticResource ListBoxStyle}">
 
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -50,32 +56,67 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Background="#FF181E5B">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    <Border Background="#FFE8E8E8" CornerRadius="10" Margin="5">
 
-                        <TextBlock
-                            Grid.Column="0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Text="{Binding ClassName}"
-                            TextAlignment="Left" />
+                        <Grid Height="180">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                        <Image
-                            Grid.Column="1"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Source="{Binding ClassImage.Source}" />
-                    </Grid>
+                            <Grid Margin="10" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock
+									Grid.Column="1"
+                                    Margin="5"
+	                                HorizontalAlignment="Center"
+		                            VerticalAlignment="Center"
+		                            Text="{Binding ClassName}"
+		                            TextAlignment="Left" />
+
+                                <Rectangle Grid.Column="1" Width="50" Stroke="Black" Height="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+
+                                </Rectangle>
+
+                                <Image
+	                                Height="50"
+		                            Width="50"
+		                            HorizontalAlignment="Left"
+		                            VerticalAlignment="Top"
+		                            Source="{Binding ClassImage.Source}" />
+                            </Grid>
+                        </Grid>
+
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
+        <Rectangle Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}" 
+                   Grid.Row="1" Height="15" Margin="5"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Black"/>
+
+
         <ListBox
             x:Name="racePicker"
-            Grid.Column="1"
+            Grid.Row="2"
+            AutomationProperties.IsOffscreenBehavior="Onscreen"
             BorderBrush="Transparent"
             BorderThickness="0"
             FontSize="16"
@@ -83,6 +124,12 @@
             SelectedItem="{Binding SelectedRace}"
             Style="{StaticResource ListBoxStyle}">
 
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -91,36 +138,60 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Background="#FF181E5B">
-                        <Grid.Effect>
-                            <DropShadowEffect />
-                        </Grid.Effect>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    <Border Background="#FFE8E8E8" CornerRadius="10" Margin="5">
 
-                        <TextBlock
-                            Grid.Column="0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Text="{Binding RaceName}"
-                            TextAlignment="Left" />
+                        <Grid Height="180">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                        <Image
-                            Grid.Column="1"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Source="{Binding RaceImage.Source}" />
-                    </Grid>
+                            <Grid Margin="10" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock
+									Grid.Column="1"
+                                    Margin="5"
+	                                HorizontalAlignment="Center"
+		                            VerticalAlignment="Center"
+		                            Text="{Binding RaceName}"
+		                            TextAlignment="Left" />
+
+                                <Rectangle Grid.Column="1" Width="50" Stroke="Black" Height="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+
+                                </Rectangle>
+
+                                <Image
+	                                Height="50"
+		                            Width="50"
+		                            HorizontalAlignment="Left"
+		                            VerticalAlignment="Top"
+		                            Source="{Binding RaceImage.Source}" />
+                            </Grid>
+                        </Grid>
+
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
         </ListBox>
 
         <Button
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
+            Grid.Row="3"
             Width="100"
             Height="20"
             Command="{Binding GenerateCommand}"
