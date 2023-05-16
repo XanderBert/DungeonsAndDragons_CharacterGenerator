@@ -119,7 +119,9 @@
     <Compile Include="Model\API.cs" />
     <Compile Include="Model\DnD\Classes.cs" />
     <Compile Include="Model\DnD\DungeonsAndDragons_api.cs" />
+    <Compile Include="Model\DnD\Proficiency.cs" />
     <Compile Include="Model\DnD\Races.cs" />
+    <Compile Include="Model\DnD\SavingThrow.cs" />
     <Compile Include="ViewModel\CharacterGeneratorPageVM.cs" />
     <Compile Include="View\CharacterGeneratorPage.xaml.cs">
       <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>

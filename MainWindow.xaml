@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DungeonsAndDragonsApp" xmlns:view="clr-namespace:DungeonsAndDragonsApp.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" MinHeight="550" MinWidth="1070">
 
-	<Window.Content>
-		<view:CharacterGeneratorPage HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    <Window.Content>
+        <view:CharacterGeneratorPage HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Window.Content>
 </Window>
