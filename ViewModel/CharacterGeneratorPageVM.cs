@@ -8,6 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
+//Todo: Image URL Binding is throwing an error
+//Todo: Add A button to regenerate an image without losing other data (This can be applied to every piece of data)
+//Todo: Present the character on a diffrent view?
+//Todo: Add A view to get more information about a specific race or class
+//Todo: Look into the ocasianal error the AI api throws
+
 namespace DungeonsAndDragonsApp.ViewModel
 {
     public class CharacterGeneratorPageVM : ObservableObject
