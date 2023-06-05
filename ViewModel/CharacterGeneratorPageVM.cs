@@ -3,16 +3,17 @@ using CommunityToolkit.Mvvm.Input;
 using DungeonsAndDragonsApp.Model;
 using DungeonsAndDragonsApp.Model.AI;
 using DungeonsAndDragonsApp.Model.DnD;
+using DungeonsAndDragonsApp.View;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 //Todo: Image URL Binding is throwing an error
-//Todo: Add A button to regenerate an image without losing other data (This can be applied to every piece of data)
-//Todo: Present the character on a diffrent view?
-//Todo: Add A view to get more information about a specific race or class
-//Todo: Look into the ocasianal error the AI api throws
+
 
 namespace DungeonsAndDragonsApp.ViewModel
 {
@@ -22,11 +23,22 @@ namespace DungeonsAndDragonsApp.ViewModel
         {
             Races = DungeonsAndDragons_api.Races;
             Classes = DungeonsAndDragons_api.Classes;
-            GenerateCommand = new RelayCommand(Generate);
             GeneratedCharacter = new Character();
+
+            GenerateCommand = new RelayCommand(Generate);
+            ShowFullScreenCommand = new RelayCommand(ShowFullScreen);
+            GenerateNameCommand = new RelayCommand(GenerateName);
+            GenerateImageCommand = new RelayCommand(GenerateURL);   
+            GenerateBackgroundCommand = new RelayCommand(GenerateBackground);
         }
 
         public RelayCommand GenerateCommand { get; private set; }
+        public RelayCommand ShowFullScreenCommand { get; private set; }
+        public RelayCommand GenerateNameCommand { get; private set; }
+        public RelayCommand GenerateImageCommand { get; private set; }
+        public RelayCommand GenerateBackgroundCommand { get; private set; }
+
+
 
         private List<Race> races;
         public List<Race> Races
@@ -70,93 +82,34 @@ namespace DungeonsAndDragonsApp.ViewModel
             set { SetProperty(ref savingThrows, value); }
         }
 
-        public async void Generate()
+        public void ShowFullScreen() 
         {
-            generatedCharacter.Reset();
-
-            string prompt = "Give me a detailed character background/description for a dungeons and dragons character its class is " + SelectedClass.ClassName + " And its Race is " + SelectedRace.RaceName + ", Make sure to structure your output as follows: Name:, \nRace:, \nClass:, \nAppearance:, \nPersonality: and \nBackground:. Make Sure you structure it like that every time and the given words to define the structure are present. the Appearance clarification should not be more then 100 words";
-
-            ////Add user added keywords if there are given
-            //if (keywordsEntry.ToString() != string.Empty)
-            //{
-            //    prompt += " Some Additional keywords are: " + Keywords;
-            //}
-
-            //Start the chat with ChatGPT
-            var chat = AIGenerator_api.Api.Chat.CreateConversation();
-            chat.AppendUserInput(prompt);
-
-            //Wait For Chat GPT To respond
-            string response = await chat.GetResponseFromChatbotAsync();
-
-            //Calculate the Name response
-            string nameResponse = GetKeywordResponse(ref response, "Name: ", "Race: ");
-            if (nameResponse.Length <= 0)
-            {
-                Generate();
-                return;
-            }
-            GeneratedCharacter.Name = nameResponse;
-
-
-            //Calculate the Race response
-            string raceResponse = GetKeywordResponse(ref response, "Race: ", "Class: ");
-            if (raceResponse.Length <= 0)
-            {
-                Generate();
-                return;
-            }
-            GeneratedCharacter.Race = raceResponse;
-
-
-            //Calculate the Class response
-            string classResponse = GetKeywordResponse(ref response, "Class: ", "Appearance: ");
-            if (classResponse.Length <= 0)
-            {
-                Generate();
-                return;
-            }
-            GeneratedCharacter.Class = classResponse;
-
-            //Calculate the Appearance response
-            string appearancePrompt = GetKeywordResponse(ref response, "Appearance: ", "Personality: ");
-            if (appearancePrompt.Length <= 0)
-            {
-                Generate();
-                return;
-            }
-
-
-            int pFrom = response.IndexOf("Background: ") + "Background: ".Length;
-            string backResponse = response.Substring(pFrom, response.Length - 1 - pFrom);
-            if (backResponse.Length <= 0)
-            {
-                Generate();
-                return;
-            }
-            GeneratedCharacter.Background = backResponse;
-
-            //Print response to the output window for debugging
-            Console.WriteLine(response);
-
-
-
-            //Generate an image on the appearance response 
-            string endAppearancePrompt = "Create a pencil drawing only in black and white a fantasy being with this appearance: " + appearancePrompt;
-            var result = await AIGenerator_api.Api.ImageGenerations.CreateImageAsync(endAppearancePrompt);
-            GeneratedCharacter.ImageUrl = result.Data[0].Url;
-
-            Console.WriteLine(GeneratedCharacter.ImageUrl);
+            CharacterSheetWindow characterSheet = new CharacterSheetWindow(GeneratedCharacter);
+            characterSheet.Show();
+        }
+        public async void Generate() 
+        {
+            GeneratedCharacter.Reset();
+            await AIGenerator_api.Generate(SelectedClass.ClassName, SelectedRace.RaceName, "");
+            GeneratedCharacter = AIGenerator_api.GetGeneratedCharacter();
         }
 
-        public string GetKeywordResponse(ref string response, string Keyword, string nextKeyword)
+        public async void GenerateName ()
         {
-            //Calculate the keyword response
-            int pFrom = response.IndexOf(Keyword) + Keyword.Length;
-            int pTo = response.LastIndexOf(nextKeyword);
-            string keywordResponse = response.Substring(pFrom, pTo - pFrom);
+            await AIGenerator_api.GenerateName();
+            GeneratedCharacter.Name = AIGenerator_api.Character.Name;
+        }
 
-            return keywordResponse;
+        public async void GenerateURL() 
+        {
+            await AIGenerator_api.GenerateUrl();
+            GeneratedCharacter.ImageUrl = AIGenerator_api.Character.ImageUrl;
+        }
+
+        public async void GenerateBackground() 
+        {
+            await AIGenerator_api.GenerateBackground();
+            generatedCharacter.Background = AIGenerator_api.Character.Background;
         }
     }
 }

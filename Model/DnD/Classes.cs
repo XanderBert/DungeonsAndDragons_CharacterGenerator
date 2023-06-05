@@ -25,6 +25,9 @@ namespace DungeonsAndDragonsApp.Model.DnD
         public List<SavingThrow> SavingThrows { get; set; }
         [JsonIgnore]
         public string SavingThrowsAsString { get; set; }
+
+        [JsonProperty("starting_equipment")]
+        public List<EquipmentResponse> StartingEquipment { get; set; }  
     }
 
     public class Class
@@ -49,7 +52,7 @@ namespace DungeonsAndDragonsApp.Model.DnD
             {
                 ClassImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/DungeonsAndDragonsApp;component/Resources/Classes/" + ClassName + ".png"));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ClassImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/DungeonsAndDragonsApp;component/Resources/Classes/NotFound.png"));
             }

@@ -119,12 +119,16 @@
     <Compile Include="Model\API.cs" />
     <Compile Include="Model\DnD\Classes.cs" />
     <Compile Include="Model\DnD\DungeonsAndDragons_api.cs" />
+    <Compile Include="Model\DnD\Equipment.cs" />
     <Compile Include="Model\DnD\Proficiency.cs" />
     <Compile Include="Model\DnD\Races.cs" />
     <Compile Include="Model\DnD\SavingThrow.cs" />
     <Compile Include="ViewModel\CharacterGeneratorPageVM.cs" />
     <Compile Include="View\CharacterGeneratorPage.xaml.cs">
       <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CharacterSheetWindow.xaml.cs">
+      <DependentUpon>CharacterSheetWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +143,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\CharacterGeneratorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CharacterSheetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +167,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\ReGenerateIcon.png" />
     <Resource Include="Resources\Races\Dwarf.png" />
     <Resource Include="Resources\Races\Gnome.png" />
     <Resource Include="Resources\Races\Halfling.png" />

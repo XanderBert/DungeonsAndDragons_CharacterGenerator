@@ -29,7 +29,7 @@ namespace DungeonsAndDragonsApp.Model.DnD
             {
                 RaceImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/DungeonsAndDragonsApp;component/Resources/Races/" + RaceName + ".png"));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 RaceImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/DungeonsAndDragonsApp;component/Resources/Races/NotFound.png"));
